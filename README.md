@@ -69,3 +69,10 @@ do until(n>=5);
    output;
 end;
 ```
+
+### 6. Conditions
+
+```.sas
+IF expression THEN statement;
+*<ELSE statement;>
+```
