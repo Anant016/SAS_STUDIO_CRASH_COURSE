@@ -4,7 +4,7 @@
 
 ```.sas
 DATA mydata;
-INPUT name$ mobile gender$;
+INPUT name $ 1-48 mobile gender$;
 DATALINES;
 Anant 9312585135 M
 Priya 9999 F
