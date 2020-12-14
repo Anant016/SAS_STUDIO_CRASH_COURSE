@@ -111,3 +111,39 @@ proc export data=mydata
   sheet="Sheet1";
 run;
 ```
+
+### 10. Linear Regression
+
+```.sas
+DATA x;
+input xx yy;
+datalines;
+1 2
+2 3
+3 5
+4 8
+0 9
+;
+run;
+
+PROC SGSCATTER DATA=x;
+PLOT xx*yy;
+
+PROC reg data=x;
+model yy=xx/clb;
+
+DATA x2;
+input xx yy;
+datalines;
+8.5 .
+;
+
+DATA x3;
+set x x2;
+
+PROC REG data=x3;
+model yy=xx/cli; 
+
+PROC PRINT data=x3;
+
+```
