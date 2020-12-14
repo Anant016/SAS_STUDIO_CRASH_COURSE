@@ -16,6 +16,7 @@ RUN;
 
 ```.sas
 PROC PRINT DATA=mydata;
+title 'ABC';
 RUN;
 ```
 
@@ -26,6 +27,11 @@ PROC CONTENTS DATA=mydata; *metadata;
 PROC MEANS DATA=mydata; *mean,max,min,SD;
 PROC UNIVARIATE DATA=mydata; *all details, use BY/ID;
 PROC FREQ DATA=mydata;
+
+proc sort data=company;
+   by Name;
+run;
+
 ```
 
 ### 4. Import
@@ -75,4 +81,23 @@ end;
 ```.sas
 IF expression THEN statement;
 *<ELSE statement;>
+```
+
+### 7. Set/ Concatenate 
+- same attributes
+
+```.sas
+data x;
+   set data1 data2;
+run;
+```
+
+### 8. Merge
+- like join 
+
+```.sas
+data employee_info;
+   merge company finance;
+   by name;
+run;
 ```
