@@ -4,10 +4,10 @@
 
 ```.sas
 DATA mydata;
-input name$ mobile gender$;
-datalines;
+INPUT name$ mobile gender$;
+DATALINES;
 Anant 9312585135 M
 Priya 9999 F
 ;
-run;
+RUN;
 ```
