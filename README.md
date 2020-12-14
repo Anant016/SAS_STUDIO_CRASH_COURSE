@@ -4,7 +4,7 @@
 
 ```.sas
 DATA mydata;
-INPUT name $ 1-48 mobile gender$;
+INPUT name$ mobile gender$;
 DATALINES;
 Anant 9312585135 M
 Priya 9999 F
@@ -99,5 +99,15 @@ run;
 data employee_info;
    merge company finance;
    by name;
+run;
+```
+
+### 9. Export
+
+```.sas
+proc export data=mydata
+  dbms=xlsx
+  outfile='/folder/mydolder/a.xlsx' replace;
+  sheet="Sheet1";
 run;
 ```
