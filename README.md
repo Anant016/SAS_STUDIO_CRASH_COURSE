@@ -110,9 +110,11 @@ proc export data=mydata
   outfile='/folder/mydolder/a.xlsx' replace;
   sheet="Sheet1";
 run;
+
+ods
 ```
 
-### 10. Linear Regression
+### 10. Linear Regression (*)
 
 ```.sas
 DATA x;
