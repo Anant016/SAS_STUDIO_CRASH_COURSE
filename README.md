@@ -42,7 +42,7 @@ infile '/folders/myfolders/b.txt' dlm=',';
 input A$ B;
 run;
 
-*PROC IMPORT datafile ='/folders/myfolders/a.xlsx' OUT=imp_data.SAS;
+*PROC IMPORT datafile ='/folders/myfolders/a.xlsx' OUT=imp_data;
 *run;
 ```
 
