@@ -32,6 +32,13 @@ proc sort data=company;
    by Name;
 run;
 
+/* Grouping */
+Proc print data=<>;
+By country;
+Sum salary;
+Run;
+
+
 ```
 
 ### 4. Import
@@ -114,7 +121,46 @@ run;
 ods
 ```
 
-### 10. Linear Regression (*)
+### 10. Macros
+
+```.sas
+%let day=&sysday.;
+%let date=&sysdate;
+%let name 'Anant Rungta';
+%let x abc;
+
+%put &day;
+%put &date;
+%put &name;
+%put &x;
+
+%let year=2005;
+%let month=Jan;
+Proc print data=&year&month.;
+run;
+
+%put %sysfunc(year(%sysfunc(today()));
+
+
+```
+
+### 11. SQL
+
+```.sas
+proc sql;
+connect to oracle (server='myserver' database='myDB' user=myusr1 
+                       password=mypwd1 validvarname=v6)
+create table work.foo as
+ select * from connection to netezza
+     (select "Amount Budgeted$", "Amount Spent$"
+      from annual_budget);
+quit;
+
+proc contents data=work.foo;run;
+
+```
+
+### 12. Linear Regression (*)
 
 ```.sas
 DATA x;
