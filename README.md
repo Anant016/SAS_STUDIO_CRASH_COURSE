@@ -49,8 +49,19 @@ infile '/folders/myfolders/b.txt' dlm=',';
 input A$ B;
 run;
 
-*PROC IMPORT datafile ='/folders/myfolders/a.xlsx' OUT=imp_data dbms="xlsx";
-*run;
+PROC IMPORT datafile ='/folders/myfolders/a.xlsx' OUT=imp_data <REPLACE> dbms=xlsx/csv sheet=test_in_xlsx;
+run;
+```
+
+### Libname
+```.sas
+options validvarname=v7; *set colum name <space to _>;
+liibname <libref> <engine> <path>;
+libname mylib base/xlsx "path";
+
+libname <libref> clear;
+
+proc content data=mylib.table_name
 ```
 
 ### 5. Loops
