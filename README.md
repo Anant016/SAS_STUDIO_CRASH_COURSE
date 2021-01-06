@@ -30,6 +30,8 @@ PROC FREQ DATA=mydata;
 
 proc sort data=company;
    by Name;
+   where expression1 and/or expression2; * Filtering
+   where col_name in(val1,val2..);
 run;
 
 /* Grouping */
