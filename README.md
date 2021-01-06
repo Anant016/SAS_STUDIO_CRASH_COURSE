@@ -68,6 +68,8 @@ proc print data="";
    format x y 3. DOB date9.
 run;
 
+x--y 3.1
+_numeric_ 3.1
 * 3. - nearest whole number, date9. -date format;
 * 8.1, COMMA8.1, DOLLAR10.1, YEN;
 * DATE7., DATE9., MMDDYY10., DDMMYY8.,MONYY7., MONNAME.,WEEKDATE. ;
@@ -165,8 +167,27 @@ proc export data=mydata
   sheet="Sheet1";
 run;
 
-ods
+* csv;
+ods csvall file="filename.csv";
+proc print data=...;
+run;
+ods csvall close;
+
+* excel;
+ods excel file="filename.csv" <style> <options> ;
+proc print data=...;
+run;
+ods excel close;
+
+* all styles;
+proc template;
+list styles;
+run;
+
+
+
 ```
+
 
 ### 10. Macros
 
@@ -250,8 +271,40 @@ title<n> "title"
 footnote<n> ""
 ```
 
-### ods
+### ods - output delivery system
 
 ```.sas
 ods noproctitle; * switch off title;
+
+* graphs/tables;
+ods graphics on;
+
+proc freq data=.. order=freq nlevels;
+tables x y/ nocum plots=freqplot(orient=horizontal scale=percent);
+formats ...;
+run;
+```
+
+### pivot up/down - wide/narrow
+
+1. pivot down
+```.sas
+name maths science -> name subject score
+
+data new
+set ...
+keep Name Subject Score
+Subject="Math"
+score =math
+output;
+Subject="science"
+score=science
+output;
+run;
+```
+
+2. pivot up
+
+```.sas
+
 ```
