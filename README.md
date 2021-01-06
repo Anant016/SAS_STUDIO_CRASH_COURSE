@@ -1,6 +1,6 @@
 ## SAS_STUDIO_CRASH_COURSE
 
-### 1. Create Dataset
+### 1. Create/Process Dataset
 
 ```.sas
 DATA mydata;
@@ -10,6 +10,18 @@ Anant 9312585135 M
 Priya 9999 F
 ; 
 RUN;
+
+DATA myclass;
+   set sashelp.class;
+   PROFIT=SELL-CP; * Add Extra column;
+   X=upcase(x);
+   Name=propcase(name);
+   AB=cats(a,b);
+   zz=substr(abc,2,1);
+   Age=yrdif(Date, today(), "age");
+   Anniversary=mdy(month(Date), day(Date), year(today()) );
+   where..;
+run;
 ```
 
 ### 2. Print
@@ -29,9 +41,16 @@ PROC UNIVARIATE DATA=mydata; *all details, use BY/ID;
 PROC FREQ DATA=mydata;
 
 proc sort data=company;
-   by Name;
-   where expression1 and/or expression2; * Filtering
+   by <DESCENDING> Name;
+   NODUPRECS by _ALL_; * remove duplicates;
+   NODUPKEY by Name;
+   where expression1 and/or expression2; * Filtering;
    where col_name in(val1,val2..);
+   where Age is missing;
+   is null;
+   is not missing;
+   between
+   Like 
 run;
 
 /* Grouping */
@@ -41,6 +60,17 @@ Sum salary;
 Run;
 
 
+```
+## Formatting
+
+```.sas
+proc print data="";
+   format x y 3. DOB date9.
+run;
+
+* 3. - nearest whole number, date9. -date format;
+* 8.1, COMMA8.1, DOLLAR10.1, YEN;
+* DATE7., DATE9., MMDDYY10., DDMMYY8.,MONYY7., MONNAME.,WEEKDATE. ;
 ```
 
 ### 4. Import
@@ -101,6 +131,10 @@ end;
 ```.sas
 IF expression THEN statement;
 *<ELSE statement;>
+
+If expression THEN DO;
+<expressions>;
+END;
 ```
 
 ### 7. Set/ Concatenate 
@@ -207,4 +241,17 @@ model yy=xx/cli;
 
 PROC PRINT data=x3;
 
+```
+
+### title & Footnote
+
+```.sas
+title<n> "title"
+footnote<n> ""
+```
+
+### ods
+
+```.sas
+ods noproctitle; * switch off title;
 ```
