@@ -143,19 +143,25 @@ END;
 - same attributes
 
 ```.sas
-data x;
-   set data1 data2;
+data x; 
+   length x $ 9;
+   set data1 data2(rename =(x=y) drop z );
 run;
 ```
 
 ### 8. Merge
 - like join 
+- can also use proc sql;
 
 ```.sas
+1. one to one 
 data employee_info;
-   merge company finance;
+   merge company(rename=(temp=temp_2018)) finance(rename=(temp=temp_2017));
    by name;
 run;
+
+2. one to many 
+
 ```
 
 ### 9. Export
@@ -306,5 +312,20 @@ run;
 2. pivot up
 
 ```.sas
+If Subject="Math" then Math=Score
+else If Subject="Science" then Science=Score
+```
 
+3. Transpose
+```.sas
+- pivot down
+proc transpose data=.. out=..(drop=x) <prefix=> <name=>
+id =col_name<d>
+by=col_names...<a,b,c>
+var=..
+run;
+
+- pivot up
+by a b c;
+var wind1-wind4;
 ```
