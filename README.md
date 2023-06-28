@@ -1,5 +1,69 @@
 ## SAS_STUDIO_CRASH_COURSE
 
+# NOTES
+```.sas
+*Read data separated by blanks into SAS;
+
+/* 
+Tim M 50 145
+Sara . 23 130 
+Mike M 65 180
+Laura F . 130
+Sean M 15 167
+*/
+
+data sdata_blanks;
+   infile "/folders/myfolders/DATA_blanks.txt";
+   input name $ Gender $ Age Weight;
+run;
+
+proc print data=sdata_blanks;
+run;
+
+
+/* Read .csv data*/
+
+/* 
+Tim, M, 50, 145
+Sara, , 23, 130 
+Mike, M, 65, 180
+Laura, F, ,130
+Sean, M, 15, 167
+*/
+ 
+data sdata_commas;
+   infile "/folders/myfolders/DATA_commas.csv" dsd;
+   input name $ Gender $ Age Weight;
+run;
+
+proc print data=sdata_commas;
+run;
+
+DSD (delimiter-sensitive data)
+The DSD option changes how SAS treats delimiters when you use LIST input and sets the default delimiter to a comma. When you specify DSD, SAS treats two consecutive delimiters as a missing value and removes quotation marks from character values.
+
+
+data sdata_commas;
+   infile "/folders/myfolders/DATA_commas.csv" delimiter/dlm=':';
+   input name $ Gender $ Age Weight;
+run;
+
+Formats
+	1.W.d - 3.   
+	- 3.1- 3 columns and 1 decimal pt ex: 3.1
+
+	2. $w. (max char)
+
+	3. MMDDYY10. 10/21/1978 - 8 digit 2 /
+Sas date is value b/w no. of days from x to 1st Jan 1960![Uploading image.png…]()
+
+
+```
+
+
+
+
+
 ### 1. Create/Process Dataset
 
 ```.sas
